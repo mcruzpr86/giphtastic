@@ -30,6 +30,8 @@ $("button").on("click", function() {
         url:queryURL,
         method: "GET"
     })
+
+    
     
 
 
