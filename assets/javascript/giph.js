@@ -42,28 +42,40 @@ $("button").on("click", function() {
 
 
         results.forEach(giph => {
+            for (var i = 0; i < results.length; i++) {
+                var giphDiv = $('<div>')
+                var p = $("<p>").text("Rating: " + results[i].rating);
+                var still = giph.images.downsized_still.url
+                var animate = giph.images.downsized_large.url
+                console.log(animate)
+    
+                
+                var giphImage = $('<img>')
+                giphImage.attr('src', still)
+                giphImage.addClass('gif')
+                giphDiv.append(giphImage)
+                giphDiv.append(p)
+                
+                $(".gif").on("click", function() {
+                    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+                    var state = $(this).attr("data-state");
+                    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+                    // Then, set the image's data-state to animate
+                    // Else set src to the data-still value
+                    if (state === "still") {
+                      $(this).attr("src", $(this).attr("data-animate"));
+                      $(this).attr("data-state", "animate");
+                    } else {
+                      $(this).attr("src", $(this).attr("data-still"));
+                      $(this).attr("data-state", "still");
+                    }
+                  });
+               //var giphImage = $('<img>')
+                //giphImage.attr('src', animate)
+            }
             
-            var still = giph.images.downsized_still.url
-            var animate = giph.images.downsized_large.url
-            console.log(animate)
 
-
-            var giphImage = $('<img>')
-            giphImage.attr('src', still)
-
-            
-            if (still === "still") {
-                $(this).attr("src", $(this).attr("data-animate"));
-                $(this).attr("data-state", "animate");
-              } else {
-                $(this).attr("src", $(this).attr("data-still"));
-                $(this).attr("data-state", "still");
-              }
-
-           //var giphImage = $('<img>')
-            //giphImage.attr('src', animate)
-
-            giphDiv.append(giphImage)
+            giphGoHere.append(giphDiv)
 
 
         });
