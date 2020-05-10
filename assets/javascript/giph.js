@@ -41,21 +41,27 @@ $("button").on("click", function() {
         giphGoHere.append(giphDiv)
 
 
-        results.forEach(giph => {
+       // results.forEach(giph => {
             for (var i = 0; i < results.length; i++) {
                 var giphDiv = $('<div>')
                 var p = $("<p>").text("Rating: " + results[i].rating);
-                var still = giph.images.downsized_still.url
-                var animate = giph.images.downsized_large.url
-                console.log(animate)
+                //var still = giph.images.downsized_still.url
+                //var animate = giph.images.downsized_large.url
+                //console.log(animate)
     
                 
                 var giphImage = $('<img>')
-                giphImage.attr('src', still)
+                giphImage.attr('src', results[i].images.original_still.url)
                 giphImage.addClass('gif')
+                giphImage.attr('data-still', results[i].images.original_still.url)
+                giphImage.attr('data-animate', results[i].images.original.url)
+                giphImage.attr('data-state', 'still')
                 giphDiv.append(giphImage)
                 giphDiv.append(p)
-                
+
+                giphGoHere.append(giphDiv)
+            }
+
                 $(".gif").on("click", function() {
                     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
                     var state = $(this).attr("data-state");
@@ -70,32 +76,18 @@ $("button").on("click", function() {
                       $(this).attr("data-state", "still");
                     }
                   });
+
                //var giphImage = $('<img>')
                 //giphImage.attr('src', animate)
-            }
+            
             
 
-            giphGoHere.append(giphDiv)
+         
 
 
-        });
+        //});
         
     }) 
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
 
 });
 
