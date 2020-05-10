@@ -49,12 +49,25 @@ $("button").on("click", function() {
 
 
             var giphImage = $('<img>')
-            giphImage.attr('src', animate)
+            giphImage.attr('src', still)
+
+            
+            if (still === "still") {
+                $(this).attr("src", $(this).attr("data-animate"));
+                $(this).attr("data-state", "animate");
+              } else {
+                $(this).attr("src", $(this).attr("data-still"));
+                $(this).attr("data-state", "still");
+              }
+
+           //var giphImage = $('<img>')
+            //giphImage.attr('src', animate)
 
             giphDiv.append(giphImage)
 
 
         });
+        
     }) 
 
     
