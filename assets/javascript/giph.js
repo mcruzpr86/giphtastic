@@ -21,10 +21,12 @@ let starWarsCharacters = [
 ];
 
 // Adding click event listen listener to all buttons
-$("button").on("click", function() {
+$("button").on("click", function(event) {
     //grabs and stores the characters type value from the button
     let cast = $(this).attr("value");
         $('#giphsDiv').remove()
+
+//
 
     let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + cast
      + "&api_key=4EDRtUmmJKZKDA1pCiiVlPhQEGz4096l";
@@ -40,14 +42,12 @@ $("button").on("click", function() {
         giphDiv.attr('id', 'giphsDiv')
         giphGoHere.append(giphDiv)
 
-
-       // results.forEach(giph => {
+        
+      
             for (var i = 0; i < results.length; i++) {
                 var giphDiv = $('<div>')
                 var p = $("<p>").text("Rating: " + results[i].rating);
-                //var still = giph.images.downsized_still.url
-                //var animate = giph.images.downsized_large.url
-                //console.log(animate)
+              
     
                 
                 var giphImage = $('<img>')
@@ -77,19 +77,36 @@ $("button").on("click", function() {
                     }
                   });
 
-               //var giphImage = $('<img>')
-                //giphImage.attr('src', animate)
-            
-            
-
-         
-
-
-        //});
+               
         
     }) 
 
 });
 
-})
 
+
+// Function for displaying movie data
+function renderButtons() {
+
+    // Deleting the movie buttons prior to adding new movie buttons
+    // (this is necessary otherwise we will have repeat buttons)
+    $("#buttons-view").empty();
+    event.preventDefault()
+    // Looping through the array of movies
+    for (var i = 0; i < starWarsCharacters.length; i++) {
+
+      // Then dynamicaly generating buttons for each movie in the array.
+      // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
+      var a = $("<button>");
+      // Adding a class
+      a.addClass("characterbtn");
+      // Adding a data-attribute with a value of the movie at index i
+      a.attr("data-name", starWarsCharacters[i]);
+      // Providing the button's text with a value of the movie at index i
+      a.text(starWarsCharacters[i]);
+      // Adding the button to the HTML
+      $("#buttons-view").append(a);
+    }
+  }
+
+});
